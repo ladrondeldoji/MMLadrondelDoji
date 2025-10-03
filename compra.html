@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Ladrón del Doji - Robot de Trading Automatizado</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Arial', sans-serif; background:#0f172a; color:#e2e8f0; line-height:1.6; }
+header { text-align:center; padding:60px 20px; background: linear-gradient(135deg,#0f172a,#1e293b); color:white; border-bottom: 1px solid #334155; }
+header h1 { font-size:2.8em; margin-bottom:10px; color:#38bdf8; }
+header p { font-size:1.2em; margin-bottom:10px; color:#cbd5e1; }
+header .info { color:#10b981; font-weight:bold; font-size:1em; margin-top: 10px; }
+main { max-width:1200px; margin:auto; padding:50px 20px; }
+.platform-section { margin-bottom:50px; }
+.platform-title { text-align:center; margin-bottom:15px; color:#38bdf8; font-size:1.8em; }
+.platform-subtitle { text-align:center; margin-bottom:20px; color:#94a3b8; font-size:1.1em; }
+.cards { display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:25px; margin-bottom:50px; }
+.card { background:#1e293b; padding:30px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.3); text-align:center; cursor:pointer; transform:translateY(0); transition: transform 0.4s, box-shadow 0.4s; position:relative; border: 1px solid #334155; }
+.card:hover { transform: translateY(-10px); box-shadow:0 15px 35px rgba(0,0,0,0.4); }
+.card h3 { font-size:1.4em; margin-bottom:8px; color:#38bdf8; }
+.card p { margin:8px 0; color:#cbd5e1; }
+.card .price { font-weight:bold; font-size:1.4em; margin:12px 0; color:#10b981; }
+.card .price-detail { font-size:0.9em; color:#94a3b8; margin-bottom: 10px; }
+.card .iva { font-size:0.9em; color:#fbbf24; margin-bottom: 10px; font-weight: bold; }
+.card .iva.no-iva { color:#10b981; }
+.card button { background:#38bdf8; color:#0f172a; border:none; padding:14px 22px; font-size:16px; border-radius:10px; cursor:pointer; transition: background 0.3s; font-weight: bold; width: 100%; }
+.card button:hover { background:#0ea5e9; }
+.card .badge { position:absolute; top:15px; right:15px; background:#10b981; color:#0f172a; padding:5px 10px; border-radius:20px; font-size:0.8em; font-weight:bold; }
+.card .badge.manual { background:#f59e0b; }
+.card .badge.patreon { background:#ff424d; color:white; }
+.card .badge.free { background:#8b5cf6; color:white; }
+.card .badge.new { background:#8b5cf6; color:white; }
+.hidden { display:none; }
+.fade-in { opacity:1 !important; }
+.product-info { background:#1e293b; padding:40px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.3); margin-bottom:50px; border: 1px solid #334155; }
+.product-info h2 { text-align:center; margin-bottom:25px; color:#38bdf8; }
+.product-info ul { list-style-type: none; padding-left: 0; }
+.product-info li { margin-bottom: 15px; padding-left: 25px; position: relative; color:#cbd5e1; }
+.product-info li:before { content: "✓"; color: #10b981; font-weight: bold; position: absolute; left: 0; }
+.payment-instructions { background:#334155; padding:20px; border-radius:8px; margin:20px 0; }
+.payment-instructions h3 { color:#38bdf8; margin-bottom:15px; }
+.payment-instructions ol { margin-left:20px; }
+.payment-instructions li { margin-bottom:10px; }
+.platforms-container { position: relative; }
+.crypto-info { background: #1e293b; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #38bdf8; }
+.crypto-info h4 { color: #38bdf8; margin-bottom: 8px; }
+.back-button { background: #475569; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-size: 14px; }
+.back-button:hover { background: #64748b; }
+.crypto-addresses { background:#334155; padding:15px; border-radius:8px; margin:15px 0; text-align:left; }
+.crypto-address { margin:10px 0; font-family: monospace; font-size:0.9em; word-break: break-all; }
+.disclaimer { margin-top:25px; font-size:0.9em; color:#94a3b8; }
+.socials { margin-top:15px; font-size:0.9em; text-align:center; }
+.socials a { color:#38bdf8; text-decoration:none; margin:0 10px; }
+.socials a:hover { text-decoration:underline; }
+.faq { max-width:800px; margin:auto; margin-top:50px; }
+.faq h2 { margin-bottom:20px; text-align:center; font-size:1.8em; color:#38bdf8; }
+.faq-item { background:#1e293b; margin-bottom:12px; border-radius:12px; padding:20px; box-shadow:0 6px 20px rgba(0,0,0,0.3); cursor:pointer; transition: background 0.3s; border: 1px solid #334155; }
+.faq-item:hover { background:#334155; }
+.faq-item strong { color:#38bdf8; }
+.faq-item p { margin-top:10px; display:none; color:#cbd5e1; }
+.faq-item.active p { display:block; }
+#darwinex-zero, #axi-broker { margin:50px auto; max-width:800px; text-align:center; padding:40px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.3); border: 1px solid #334155; }
+#darwinex-zero { background:#1e3a8a; }
+#axi-broker { background:#064e3b; }
+#axi-broker.banner { grid-column: 1 / -1; background: linear-gradient(135deg, #064e3b, #059669); padding:50px; margin:30px auto; max-width: 1000px; text-align: center; }
+#axi-broker.banner h2 { font-size:2.2em; margin-bottom:15px; color:#ffffff; }
+#axi-broker.banner p { font-size:1.3em; color:#d1fae5; margin-bottom:20px; }
+#darwinex-zero a, #axi-broker a { display:inline-block; margin-top:20px; background:#38bdf8; color:#0f172a; padding:16px 28px; border-radius:12px; font-size:1.1em; text-decoration:none; transition: background 0.3s; font-weight: bold; }
+#darwinex-zero a:hover, #axi-broker a:hover { background:#0ea5e9; }
+footer { text-align:center; padding:30px; font-size:0.9em; color:#94a3b8; margin-top:50px; border-top: 1px solid #334155; }
+.nav-buttons { text-align: center; margin: 30px 0; }
+.nav-buttons a { display: inline-block; background: #475569; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 0 10px; transition: background 0.3s; }
+.nav-buttons a:hover { background: #64748b; }
+.nav-buttons a.primary { background: #38bdf8; color: #0f172a; }
+.nav-buttons a.primary:hover { background: #0ea5e9; }
+.affiliate-banner { margin: 20px 0; text-align: center; }
+.affiliate-banner img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+.benefit-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #334155; }
+.benefit-card h4 { color: #38bdf8; margin-bottom: 10px; }
+.benefit-card p { color: #cbd5e1; font-size: 0.9em; }
+.free-options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 30px 0; }
+.free-option-card { background: #1e293b; padding: 30px; border-radius: 16px; text-align: center; border: 1px solid #334155; position: relative; }
+.free-option-card .badge { position: absolute; top: 15px; right: 15px; background: #8b5cf6; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
+.flexible-pricing { display: flex; justify-content: space-around; margin: 15px 0; }
+.flexible-option { text-align: center; padding: 10px; }
+.flexible-option .price { font-weight: bold; font-size: 1.2em; color: #10b981; }
+.flexible-option .period { font-size: 0.9em; color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>MM Ladrón del Doji</h1>
+    <p>Robot de Trading Automatizado para MetaTrader 5</p>
+    <p class="info">Recuerda: El propietario del robot es proveedor de señales de Darwinex Zero, por lo que no se autorizará su uso en la plataforma. Pueden invertir en mi Darwin en cuanto esté creado, les avisaré por correo.</p>
+</header>
+
+<main>
+
+<!-- Botones de navegación -->
+<div class="nav-buttons">
+    <a href="index.html" class="primary">Ver Resultados del Robot</a>
+    <a href="#faq">Preguntas Frecuentes</a>
+</div>
+
+<!-- INFORMACIÓN DEL PRODUCTO -->
+<section class="product-info">
+    <h2>Automatiza tu Trading con MM Ladrón del Doji</h2>
+    <p style="color:#cbd5e1; text-align:center;">Robot profesional que utiliza Bandas de Bollinger, gestión de dinero inteligente y filtros avanzados para maximizar ganancias en mercados alcistas.</p>
+    
+    <h3 style="margin-top: 25px; margin-bottom: 15px; color:#38bdf8;">Características principales:</h3>
+    <ul>
+        <li>Detección automática de oportunidades con Bandas de Bollinger</li>
+        <li>Gestor de riesgo configurable según tu perfil</li>
+        <li>Filtros avanzados para noticias, earnings y vencimientos de opciones</li>
+        <li>Operaciones automatizadas 24/5 sin intervención manual</li>
+        <li>Compatible con la mayoría de brokers que ofrecen MT5</li>
+        <li>Soporte técnico continuo y actualizaciones gratuitas</li>
+    </ul>
+</section>
+
+<!-- OPCIONES GRATUITAS MEJORADAS -->
+<section id="free-options">
+    <h2 class="platform-title">Obtén el Robot Gratis</h2>
+    <p class="platform-subtitle">Regístrate en cualquiera de estos brokers y recibe MM Ladrón del Doji completamente GRATIS</p>
+    
+    <div class="free-options-grid">
+        <!-- OPCIÓN AXI BROKER -->
+        <div class="free-option-card">
+            <div class="badge">Recomendado</div>
+            <h3>Axi Broker</h3>
+            <p class="price">Robot Gratis + Acceso Axi Select</p>
+            <p class="iva no-iva">Sin coste adicional</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4>Robot Gratis</h4>
+                    <p>MM Ladrón del Doji sin coste</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Axi Select</h4>
+                    <p>Acceso a estrategias premium</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Copy Trading</h4>
+                    <p>Replica operaciones automáticamente</p>
+                </div>
+            </div>
+            
+            <!-- Banner Axi -->
+            <div class="affiliate-banner">
+                <a href="https://records.axiaffiliates.com/visit/?bta=41053&brand=axitrader" target="_blank">
+                    <img src="https://axiaffiliates.ck-cdn.com/tn/serve/?cid=503939" alt="Axi Broker - Trading Profesional" width="970" height="250" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+            
+            <button onclick="showFormWithInstructions('axi', 'gratis')">Obtener Gratis con Axi</button>
+            <p style="margin-top:10px; font-size:0.8em; color:#94a3b8;">Regístrate y recibe el robot manualmente tras verificación</p>
+        </div>
+
+        <!-- OPCIÓN DARWINEX ZERO -->
+        <div class="free-option-card">
+            <div class="badge">1 Mes Gratis</div>
+            <h3>Darwinex Zero</h3>
+            <p class="price">1 Mes de Robot Gratis</p>
+            <p class="iva no-iva">Comisiones Cero en España</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4>1 Mes Gratis</h4>
+                    <p>Robot completo sin coste</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Comisiones Cero</h4>
+                    <p>Especial para traders españoles</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Broker Regulado</h4>
+                    <p>FCA y CNMV</p>
+                </div>
+            </div>
+            
+            <div style="background: #1e3a8a; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                <h4 style="color: #ffffff; margin-bottom: 10px;">Código de Referido:</h4>
+                <div style="background: #ffffff; color: #1e3a8a; padding: 10px; border-radius: 6px; font-family: monospace; font-weight: bold; font-size: 1.1em;">
+                    DWZ2341448MGM
+                </div>
+                <p style="color: #dbeafe; font-size: 0.8em; margin-top: 8px;">Usa este código al registrarte</p>
+            </div>
+            
+            <a href="https://www.darwinexzero.com/es/join" target="_blank" style="display: block; background: #1e3a8a; color: white; padding: 14px; border-radius: 10px; text-decoration: none; font-weight: bold; margin: 10px 0;">
+                Registrarme en Darwinex Zero
+            </a>
+            
+            <button onclick="showFormWithInstructions('darwinex', 'gratis')">Solicitar Mes Gratis</button>
+            <p style="margin-top:10px; font-size:0.8em; color:#94a3b8;">Después de registrarte, completa el formulario</p>
+        </div>
+    </div>
+</section>
+
+<div class="platforms-container">
+    <!-- STRIPE - LICENCIA INMEDIATA -->
+    <section class="platform-section">
+        <h2 class="platform-title">Adquirir en Stripe</h2>
+        <p class="platform-subtitle">Licencia inmediata - Recibe tu robot automáticamente tras el pago</p>
+        <div class="cards">
+            <div class="card" data-method="stripe" data-license="compra" data-link="https://checkout.stripe.com/c/pay/cs_live_a1ErywMWOY7BxJInGXf407MosnHnmn6ou7Cl3QNF4vdumPLoxOU942ASGS#fidkdWxOYHwnPyd1blppbHNgWjA0VkdyPE9XcmczT392dXdua2xOd2o3SDRfPVJnd19INktpQ0pOc2tjYHZGQkhcfT1MXUxpZGdibzZdbHdCZzA9QmNRTWFXRjxgQl99RDVwUWw1Qlw9VlNJNTUxbnRjVkx3TCcpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl">
+                <div class="badge">Inmediato</div>
+                <h3>Licencia Única</h3>
+                <p class="price">499€</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago único - Sin renovaciones</p>
+                <p>Recibe el robot automáticamente tras el pago</p>
+                <button>Comprar Ahora</button>
+            </div>
+            <div class="card" data-method="stripe" data-license="alquiler" data-link="https://checkout.stripe.com/c/pay/cs_live_a1kPmcJxihwPD8d98Ea2ogMokXX3d71ADZ2lantcpRSaLudUOdvWBd1QHu#fidkdWxOYHwnPyd1blppbHNgWjA0VkdyPE9XcmczT392dXdua2xOd2o3SDRfPVJnd19INktpQ0pOc2tjYHZGQkhcfT1MXUxpZGdibzZdbHdCZzA9QmNRTWFXRjxgQl99RDVwUWw1Qlw9VlNJNTUxbnRjVkx3TCcpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYilgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl">
+                <div class="badge">Inmediato</div>
+                <h3>Alquiler Mensual</h3>
+                <p class="price">29,99€/mes</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago mensual recurrente</p>
+                <p>Recibe el robot automáticamente tras el pago</p>
+                <button>Suscribirse</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVAS OPCIONES DE PAGO POR DÍAS Y SEMANAS -->
+    <section class="platform-section">
+        <h2 class="platform-title">Compra Flexible</h2>
+        <p class="platform-subtitle">Pago por días o semanas - Ideal para probar el robot</p>
+        <div class="cards">
+            <!-- PAGO FLEXIBLE UNIFICADO -->
+            <div class="card" data-method="flexible" data-license="flexible">
+                <div class="badge new">Nuevo</div>
+                <h3>Compra Flexible</h3>
+                <div class="flexible-pricing">
+                    <div class="flexible-option">
+                        <div class="price">2€/día</div>
+                        <div class="period">Mínimo 3 días</div>
+                    </div>
+                    <div class="flexible-option">
+                        <div class="price">10€/semana</div>
+                        <div class="period">Mínimo 1 semana</div>
+                    </div>
+                </div>
+                <p class="iva no-iva">Sin IVA</p>
+                <p>Ideal para probar el robot</p>
+                <p>Flexibilidad total</p>
+                <button>Seleccionar Opción</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PATREON - VERIFICACIÓN MANUAL -->
+    <section class="platform-section">
+        <h2 class="platform-title">Adquirir en Patreon</h2>
+        <p class="platform-subtitle">Verificación manual - Completa el formulario tras el pago</p>
+        <div class="cards">
+            <div class="card" data-method="patreon" data-license="compra" data-link="https://www.patreon.com/posts/ea-ladron-del-v1-138394833">
+                <div class="badge patreon">Manual</div>
+                <h3>Licencia Única</h3>
+                <p class="price">499€</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago único - Sin renovaciones</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Comprar Ahora</button>
+            </div>
+            <div class="card" data-method="patreon" data-license="alquiler" data-link="https://www.patreon.com/posts/alquiler-mensual-140002620">
+                <div class="badge patreon">Manual</div>
+                <h3>Alquiler Mensual</h3>
+                <p class="price">29,99€/mes</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago mensual recurrente</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Suscribirse</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAYPAL - VERIFICACIÓN MANUAL -->
+    <section class="platform-section">
+        <h2 class="platform-title">Adquirir en PayPal</h2>
+        <p class="platform-subtitle">Verificación manual - Completa el formulario tras el pago</p>
+        <div class="cards">
+            <div class="card" data-method="paypal" data-license="compra" data-link="https://www.paypal.com/ncp/payment/QWVCLVP22DADW">
+                <div class="badge manual">Manual</div>
+                <h3>Licencia Única</h3>
+                <p class="price">499€</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago único - Sin renovaciones</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Comprar Ahora</button>
+            </div>
+            <div class="card" data-method="paypal" data-license="alquiler" data-link="https://www.paypal.com/ncp/payment/TAWBJRKWGFU6N">
+                <div class="badge manual">Manual</div>
+                <h3>Alquiler Mensual</h3>
+                <p class="price">29,99€/mes</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago mensual recurrente</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Suscribirse</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BITGET - VERIFICACIÓN MANUAL -->
+    <section class="platform-section">
+        <h2 class="platform-title">Adquirir con Bitget</h2>
+        <p class="platform-subtitle">Verificación manual - Completa el formulario tras el pago</p>
+        <div class="cards">
+            <div class="card" data-method="bitget" data-license="compra">
+                <div class="badge manual">Manual</div>
+                <h3>Licencia Única</h3>
+                <p class="price">499€</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago único - Sin renovaciones</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Comprar Ahora</button>
+            </div>
+            <div class="card" data-method="bitget" data-license="alquiler">
+                <div class="badge manual">Manual</div>
+                <h3>Alquiler Mensual</h3>
+                <p class="price">29,99€/mes</p>
+                <p class="iva">+ IVA</p>
+                <p>Pago mensual recurrente</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Suscribirse</button>
+            </div>
+            <div class="card" data-method="bitget" data-license="flexible">
+                <div class="badge manual new">Nuevo</div>
+                <h3>Compra Flexible</h3>
+                <div class="flexible-pricing">
+                    <div class="flexible-option">
+                        <div class="price">2€/día</div>
+                        <div class="period">Mínimo 3 días</div>
+                    </div>
+                    <div class="flexible-option">
+                        <div class="price">10€/semana</div>
+                        <div class="period">Mínimo 1 semana</div>
+                    </div>
+                </div>
+                <p class="iva">+ IVA</p>
+                <p>Flexibilidad total</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Seleccionar Opción</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WALLET - VERIFICACIÓN MANUAL -->
+    <section class="platform-section">
+        <h2 class="platform-title">Adquirir con Wallet</h2>
+        <p class="platform-subtitle">Verificación manual - Completa el formulario tras el pago</p>
+        <div class="cards">
+            <div class="card" data-method="wallet" data-license="compra">
+                <div class="badge manual">Manual</div>
+                <h3>Licencia Única</h3>
+                <p class="price">499€</p>
+                <p class="iva no-iva">Sin IVA</p>
+                <p>Pago único - Sin renovaciones</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Comprar Ahora</button>
+            </div>
+            <div class="card" data-method="wallet" data-license="alquiler">
+                <div class="badge manual">Manual</div>
+                <h3>Alquiler Mensual</h3>
+                <p class="price">29,99€/mes</p>
+                <p class="iva no-iva">Sin IVA</p>
+                <p>Pago mensual recurrente</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Suscribirse</button>
+            </div>
+            <div class="card" data-method="wallet" data-license="flexible">
+                <div class="badge manual new">Nuevo</div>
+                <h3>Compra Flexible</h3>
+                <div class="flexible-pricing">
+                    <div class="flexible-option">
+                        <div class="price">2€/día</div>
+                        <div class="period">Mínimo 3 días</div>
+                    </div>
+                    <div class="flexible-option">
+                        <div class="price">10€/semana</div>
+                        <div class="period">Mínimo 1 semana</div>
+                    </div>
+                </div>
+                <p class="iva no-iva">Sin IVA</p>
+                <p>Flexibilidad total</p>
+                <p>Completa el formulario tras el pago</p>
+                <button>Seleccionar Opción</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- FORMULARIO POST-PAGO - GOOGLE FORMS -->
+<section id="post-payment-form" class="hidden">
+    <button class="back-button" onclick="showPlatforms()">Volver a opciones de pago</button>
+    
+    <div style="max-width:650px; margin:auto; background:#1e293b; padding:40px; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155;">
+        <h2 id="form-title">Completa tus datos para activar tu licencia</h2>
+        <p id="form-description">Recibirás un correo con el robot en cuanto tu licencia esté activa (normalmente en pocos minutos)</p>
+
+        <!-- INSTRUCCIONES ESPECÍFICAS -->
+        <div class="payment-instructions" id="axi-instructions" style="display:none;">
+            <h3>Instrucciones para obtener el robot GRATIS con Axi</h3>
+            <ol>
+                <li>Primero, regístrate en Axi Broker usando el siguiente enlace:</li>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="https://records.axiaffiliates.com/visit/?bta=41053&brand=axitrader" target="_blank" style="background: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                        Registrarme en Axi Broker
+                    </a>
+                </div>
+                <li>Activa Axi Select en tu cuenta para acceso a estrategias premium</li>
+                <li>Completa el proceso de registro y verificación de cuenta en Axi</li>
+                <li>Una vez tengas tu cuenta de Axi activa, completa este formulario</li>
+                <li>Recibirás el robot por email manualmente una vez verifiquemos tu registro</li>
+            </ol>
+            
+            <div style="background: #10b981; color: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>Completamente GRATIS + Axi Select</strong><br>
+                No pagas nada por el robot y obtienes acceso a Axi Select con estrategias premium.
+            </div>
+        </div>
+
+        <div class="payment-instructions" id="darwinex-instructions" style="display:none;">
+            <h3>Instrucciones para obtener 1 mes GRATIS con Darwinex Zero</h3>
+            <ol>
+                <li>Regístrate en Darwinex Zero usando este enlace:</li>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="https://www.darwinexzero.com/es/join" target="_blank" style="background: #1e3a8a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                        Registrarme en Darwinex Zero
+                    </a>
+                </div>
+                <li>Usa el código de referido:</li>
+                <div style="background: #1e3a8a; color: white; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
+                    <strong style="font-size: 1.2em;">DWZ2341448MGM</strong>
+                </div>
+                <li>Completa el proceso de registro y verificación</li>
+                <li>Una vez activa tu cuenta, completa este formulario</li>
+                <li>Recibirás el robot por 1 mes completamente GRATIS</li>
+            </ol>
+            
+            <div style="background: #1e3a8a; color: white; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>1 Mes GRATIS + Comisiones Cero</strong><br>
+                Disfruta del robot sin coste durante 1 mes y opera con comisiones cero en España.
+            </div>
+        </div>
+
+        <div class="payment-instructions" id="bitget-instructions" style="display:none;">
+            <h3>Instrucciones para pagar con Bitget</h3>
+            <ol>
+                <li>Realiza el pago usando una de las siguientes direcciones:</li>
+                <div class="crypto-addresses">
+                    <p><strong>TRC-20 (USDT):</strong></p>
+                    <div class="crypto-address">TRJhCQqJjzxbLXLMbHzj7yqHKsEvofRUKK</div>
+                    <p><strong>BNB Chain:</strong></p>
+                    <div class="crypto-address">0x4754e1e16eec23ab60ebf3b68cb6c3a52cce328e</div>
+                </div>
+                
+                <div class="crypto-info">
+                    <h4>Cómo enviar por TRC-20 (Tron):</h4>
+                    <p>En tu wallet de Bitget, selecciona USDT y la red TRC-20. Las transacciones TRC-20 son rápidas y tienen bajas comisiones.</p>
+                </div>
+                
+                <div class="crypto-info">
+                    <h4>Cómo enviar por BNB Chain:</h4>
+                    <p>Selecciona USDT y la red BEP-20 (BNB Smart Chain). Asegúrate de tener BNB para pagar las comisiones de gas.</p>
+                </div>
+                
+                <li>Guarda el comprobante de la transacción (TXID/Hash)</li>
+                <li>Completa este formulario con todos tus datos</li>
+                <li>Recibirás el robot por email una vez verificado el pago</li>
+            </ol>
+            
+            <div style="background: #fbbf24; color: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>¿Quieres usar otra criptomoneda o red?</strong><br>
+                Envíame un correo a <a href="mailto:ladrondeldoji@gmail.com" style="color: #0f172a; text-decoration: underline;">ladrondeldoji@gmail.com</a> y te proporcionaré la dirección específica.
+            </div>
+        </div>
+
+        <div class="payment-instructions" id="wallet-instructions" style="display:none;">
+            <h3>Instrucciones para pagar con Wallet</h3>
+            <ol>
+                <li>Realiza el pago usando una de las siguientes direcciones:</li>
+                <div class="crypto-addresses">
+                    <p><strong>BNB Chain:</strong></p>
+                    <div class="crypto-address">0x3545372c7475a1d49fabC2D634bbeb9281f4f317</div>
+                    <p><strong>Solana:</strong></p>
+                    <div class="crypto-address">EVQNzKW21SE2o3qLtBTGrk4RixN3c4jxht73eq7FbL7w</div>
+                </div>
+                
+                <div class="crypto-info">
+                    <h4>Cómo enviar por BNB Chain:</h4>
+                    <p>Usa cualquier wallet compatible con BSC (Trust Wallet, MetaMask, etc.). Envía USDT por la red BEP-20 y asegúrate de tener BNB para las comisiones.</p>
+                </div>
+                
+                <div class="crypto-info">
+                    <h4>Cómo enviar por Solana:</h4>
+                    <p>Usa wallets como Phantom, Solflare o Trust Wallet. Envía USDT por la red Solana. Necesitarás SOL para pagar las comisiones (muy bajas).</p>
+                </div>
+                
+                <li>Guarda el comprobante de la transacción (TXID/Hash)</li>
+                <li>Completa este formulario con todos tus datos</li>
+                <li>Recibirás el robot por email una vez verificado el pago</li>
+            </ol>
+            
+            <div style="background: #10b981; color: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>Sin IVA</strong><br>
+                Al pagar con Wallet no se aplica IVA. Pagas exactamente el precio mostrado.
+            </div>
+            
+            <div style="background: #fbbf24; color: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>¿Quieres usar otra criptomoneda o red?</strong><br>
+                Envíame un correo a <a href="mailto:ladrondeldoji@gmail.com" style="color: #0f172a; text-decoration: underline;">ladrondeldoji@gmail.com</a> y te proporcionaré la dirección específica.
+            </div>
+        </div>
+
+        <div class="payment-instructions" id="patreon-instructions" style="display:none;">
+            <h3>Instrucciones para pagar con Patreon</h3>
+            <ol>
+                <li>Haz clic en el siguiente enlace para realizar el pago:</li>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="#" id="patreon-link" style="background: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                        Ir a Patreon para Pagar
+                    </a>
+                </div>
+                <li>Completa el pago en Patreon</li>
+                <li>Guarda el comprobante de pago (screenshot o email de confirmación)</li>
+                <li>Completa este formulario con todos tus datos</li>
+                <li>Recibirás el robot por email una vez verificado el pago</li>
+            </ol>
+        </div>
+
+        <div class="payment-instructions" id="paypal-instructions" style="display:none;">
+            <h3>Instrucciones para pagar con PayPal</h3>
+            <ol>
+                <li>Haz clic en el siguiente enlace para realizar el pago:</li>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="#" id="paypal-link" style="background: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                        Ir a PayPal para Pagar
+                    </a>
+                </div>
+                <li>Completa el pago en PayPal</li>
+                <li>Guarda el ID de transacción de PayPal</li>
+                <li>Completa este formulario con todos tus datos</li>
+                <li>Recibirás el robot por email una vez verificado el pago</li>
+            </ol>
+        </div>
+
+        <!-- INSTRUCCIONES PARA PAGO FLEXIBLE -->
+        <div class="payment-instructions" id="flexible-instructions" style="display:none;">
+            <h3>Instrucciones para Compra Flexible</h3>
+            <ol>
+                <li>Selecciona si deseas pagar por días (2€/día) o por semanas (10€/semana)</li>
+                <li>Calcula el importe total según el período seleccionado</li>
+                <li>Realiza el pago según el método seleccionado (Wallet, Bitget)</li>
+                <li>Guarda el comprobante de pago</li>
+                <li>Completa este formulario indicando el período seleccionado</li>
+                <li>Recibirás el robot por email activado por el período seleccionado</li>
+            </ol>
+            
+            <div style="background: #10b981; color: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <strong>Ideal para probar el robot</strong><br>
+                Paga solo por el tiempo que realmente necesitas usar el robot.
+            </div>
+            
+            <!-- INSTRUCCIONES DE CRIPTO PARA PAGO FLEXIBLE -->
+            <div class="crypto-info">
+                <h4>Direcciones para pago con criptomonedas:</h4>
+                <div class="crypto-addresses">
+                    <p><strong>TRC-20 (USDT):</strong></p>
+                    <div class="crypto-address">TRJhCQqJjzxbLXLMbHzj7yqHKsEvofRUKK</div>
+                    <p><strong>BNB Chain:</strong></p>
+                    <div class="crypto-address">0x4754e1e16eec23ab60ebf3b68cb6c3a52cce328e</div>
+                    <p><strong>Solana:</strong></p>
+                    <div class="crypto-address">EVQNzKW21SE2o3qLtBTGrk4RixN3c4jxht73eq7FbL7w</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOOGLE FORM IFRAME -->
+        <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfQC8PJlPiMf-0Fdhcu1gOygF66swZQw8nnuUtd6WPz5ITEZQ/viewform?embedded=true" 
+            width="100%" 
+            height="1200" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0"
+            style="border-radius: 12px; margin-top: 20px; border: 1px solid #475569;">
+            Cargando formulario...
+        </iframe>
+
+        <p class="disclaimer" style="margin-top: 20px;">
+        Descargo de responsabilidad: El trading conlleva riesgos. MM Ladrón del Doji no garantiza beneficios y los usuarios pueden perder dinero, especialmente si operan de manera agresiva. Use con responsabilidad.<br>
+        Errores o fallos: contacta a <a href="mailto:ladrondeldoji@gmail.com">ladrondeldoji@gmail.com</a>
+        </p>
+    </div>
+</section>
+
+<!-- REDES SOCIALES -->
+<section class="socials" style="margin-top: 40px;">
+    <h3 style="margin-bottom: 15px; color: #38bdf8;">Síguenos en nuestras redes</h3>
+    <a href="https://t.me/ladrondeldojibasic" target="_blank">Telegram</a> |
+    <a href="https://www.instagram.com/elladrondeldoji/" target="_blank">Instagram</a> |
+    <a href="https://www.youtube.com/channel/UCNW70E4v0etvX1b0ByWkGjg" target="_blank">YouTube</a> |
+    <a href="https://x.com/ladrondeldoji" target="_blank">Twitter</a> |
+    <a href="https://www.tiktok.com/@ladrondeldojipro" target="_blank">TikTok</a> |
+    <a href="mailto:ladrondeldoji@gmail.com">Email</a>
+    <p style="margin-top: 15px; font-size: 0.9em; color: #94a3b8;">Soporte técnico y consultas: ladrondeldoji@gmail.com</p>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <h2>Preguntas frecuentes (FAQ)</h2>
+    
+    <div class="faq-item">
+        <strong>¿Cómo puedo obtener el robot gratis?</strong>
+        <p>Hay dos formas de obtener MM Ladrón del Doji completamente GRATIS:<br><br>
+        <strong>Opción 1 - Axi Broker:</strong> Regístrate en Axi Broker usando nuestro enlace de afiliado y recibe el robot gratis + acceso a Axi Select con estrategias premium.<br><br>
+        <strong>Opción 2 - Darwinex Zero:</strong> Regístrate en Darwinex Zero usando nuestro código de referido "DWZ2341448MGM" y obtén 1 mes completo del robot gratis + comisiones cero para operar.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué son las nuevas opciones de pago flexibles?</strong>
+        <p>Hemos añadido opciones flexibles de pago:<br><br>
+        <strong>Pago por Días (2€/día):</strong> Ideal para probar el robot antes de comprometerte a una suscripción mensual. Mínimo 3 días.<br><br>
+        <strong>Pago por Semanas (10€/semana):</strong> Perfecto para uso continuado con mejor relación calidad-precio que el pago diario. Mínimo 1 semana.<br><br>
+        Estas opciones están disponibles en Wallet y Bitget.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué ventajas tiene Axi Select?</strong>
+        <p>Axi Select es una plataforma exclusiva de Axi Broker que te permite:<br>
+        - Acceder a estrategias de trading premium<br>
+        - Copiar operaciones de traders profesionales<br>
+        - Recibir señales de trading en tiempo real<br>
+        - Analizar el performance de diferentes estrategias<br>
+        Al registrarte en Axi a través de nuestro enlace, obtienes acceso completo a Axi Select.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué es MM Ladrón del Doji y cómo funciona?</strong>
+        <p>MM Ladrón del Doji es un Expert Advisor (EA) profesional para MetaTrader 5 que utiliza Bandas de Bollinger con gestión de dinero inteligente. El robot abre posiciones de compra cuando el precio cruza hacia abajo la banda inferior de Bollinger, siempre que se cumplan condiciones de tendencia alcista (verificada con SMA de 50 periodos) y otros filtros de seguridad. Las posiciones se cierran automáticamente cuando se alcanza un beneficio neto mínimo o cuando el precio toca la banda superior.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Cómo instalo el robot en MetaTrader 5?</strong>
+        <p>Una vez que recibas el archivo .ex5 por correo electrónico, sigue estos pasos:<br>
+        1) Abre MetaTrader 5<br>
+        2) Ve a "Archivo" > "Abrir carpeta de datos"<br>
+        3) Navega a MQL5 > Experts<br>
+        4) Copia el archivo del robot en esta carpeta<br>
+        5) Reinicia MetaTrader 5<br>
+        6) Arrastra el robot desde el Navegador hasta el gráfico donde quieras usarlo<br>
+        7) Configura los parámetros según tu perfil de riesgo</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué diferencia hay entre Stripe y otros métodos de pago?</strong>
+        <p>Con Stripe recibes la licencia de forma inmediata y automática tras el pago. Con Patreon, PayPal, Bitget, Wallet y las opciones gratuitas, necesitas completar el formulario y esperar a la verificación manual (normalmente pocos minutos).</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué necesito para activar el robot después de la compra?</strong>
+        <p>Si compras por métodos manuales (Patreon, PayPal, Bitget, Wallet) u obtienes el robot gratis, debes completar el formulario con los siguientes datos:<br>
+        - Nombre o pseudónimo<br>
+        - Correo electrónico (para enviarte el robot y actualizaciones)<br>
+        - Número de cuenta MT5<br>
+        - Broker y servidor exactos (ej: ICMarketsEU-MT5-5)<br>
+        - Fecha de compra/registro<br>
+        - Para pagos flexibles: número de días/semanas seleccionados<br>
+        Yo actualizaré el servidor para que admita tu cuenta de trading.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué filtros de seguridad incluye el robot?</strong>
+        <p>El robot incluye filtros avanzados para:<br>
+        - Noticias de alto impacto (±2 horas)<br>
+        - Reportes de ganancias (±7 días)<br>
+        - Vencimientos de opciones (mensuales y trimestrales)<br>
+        - Gaps alcistas y bajistas<br>
+        - Spread máximo permitido<br>
+        - Volumen relativo por tipo de activo<br>
+        - Límites por zona geográfica</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿El precio incluye IVA?</strong>
+        <p>En Stripe, Patreon, PayPal y Bitget el IVA se añade al precio mostrado. Solo las compras con Wallet y las opciones gratuitas no tienen IVA adicional.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Qué pasa si pierdo dinero usando el robot?</strong>
+        <p>El trading conlleva riesgos. MM Ladrón del Doji está diseñado con gestión de riesgo, pero no puede garantizar beneficios. Te recomendamos:<br>
+        - Usar el robot en una cuenta demo primero<br>
+        - Configurar parámetros conservadores según tu perfil de riesgo<br>
+        - Nunca invertir dinero que no estés dispuesto a perder<br>
+        - Limitar los símbolos que quieres operar y el capital expuesto</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Ofrecen soporte técnico y actualizaciones?</strong>
+        <p>Sí, ofrecemos soporte técnico completo a través de Telegram y correo electrónico. También proporcionamos actualizaciones periódicas del software, incluyendo nuevas versiones y archivos actualizados para filtrar noticias y earnings (normalmente los domingos).</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>¿Funciona en cualquier broker?</strong>
+        <p>El robot funciona con la mayoría de brokers que ofrecen MetaTrader 5. Sin embargo, Darwinex no es un broker aceptado. Si tienes dudas sobre tu broker específico, contáctanos por Telegram para verificar la compatibilidad.</p>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    &copy; 2025 MM Ladrón del Doji. Todos los derechos reservados.
+</footer>
+
+<script>
+// URLs de pago
+const paymentLinks = {
+    'patreon-compra': 'https://www.patreon.com/posts/ea-ladron-del-v1-138394833',
+    'patreon-alquiler': 'https://www.patreon.com/posts/alquiler-mensual-140002620',
+    'paypal-compra': 'https://www.paypal.com/ncp/payment/QWVCLVP22DADW',
+    'paypal-alquiler': 'https://www.paypal.com/ncp/payment/TAWBJRKWGFU6N'
+};
+
+// Elementos del DOM
+const cards = document.querySelectorAll('.card');
+const formSection = document.getElementById('post-payment-form');
+const platformsContainer = document.querySelector('.platforms-container');
+const axiInstructions = document.getElementById('axi-instructions');
+const darwinexInstructions = document.getElementById('darwinex-instructions');
+const bitgetInstructions = document.getElementById('bitget-instructions');
+const walletInstructions = document.getElementById('wallet-instructions');
+const patreonInstructions = document.getElementById('patreon-instructions');
+const paypalInstructions = document.getElementById('paypal-instructions');
+const flexibleInstructions = document.getElementById('flexible-instructions');
+const formTitle = document.getElementById('form-title');
+const formDescription = document.getElementById('form-description');
+const patreonLink = document.getElementById('patreon-link');
+const paypalLink = document.getElementById('paypal-link');
+
+// Manejo de clics en las cards
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        const metodo = card.getAttribute('data-method');
+        const licencia = card.getAttribute('data-license');
+        const link = card.getAttribute('data-link');
+        
+        // Stripe, Patreon y PayPal redirigen directamente
+        if ((metodo === 'stripe' || metodo === 'patreon' || metodo === 'paypal') && link) {
+            window.open(link, '_blank');
+            return;
+        }
+        
+        // Métodos manuales muestran formulario
+        showFormWithInstructions(metodo, licencia);
+    });
+});
+
+// Función para mostrar formulario con instrucciones
+function showFormWithInstructions(metodo, licencia) {
+    // Ocultar todas las instrucciones primero
+    [axiInstructions, darwinexInstructions, bitgetInstructions, walletInstructions, 
+     patreonInstructions, paypalInstructions, flexibleInstructions].forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Configurar según el método
+    if (metodo === 'axi') {
+        formTitle.textContent = 'Completa tus datos para obtener el robot GRATIS';
+        formDescription.textContent = 'Recibirás el robot por email manualmente tras verificar tu registro en Axi Broker';
+        axiInstructions.style.display = 'block';
+    } else if (metodo === 'darwinex') {
+        formTitle.textContent = 'Completa tus datos para obtener 1 mes GRATIS';
+        formDescription.textContent = 'Recibirás el robot por 1 mes completamente gratis tras verificar tu registro en Darwinex Zero';
+        darwinexInstructions.style.display = 'block';
+    } else {
+        formTitle.textContent = 'Completa tus datos para activar tu licencia';
+        formDescription.textContent = 'Recibirás un correo con el robot en cuanto tu licencia esté activa (normalmente en pocos minutos)';
+        
+        // Mostrar instrucciones específicas según método y licencia
+        if (licencia === 'flexible') {
+            flexibleInstructions.style.display = 'block';
+        }
+        
+        const instructionsMap = {
+            'bitget': bitgetInstructions,
+            'wallet': walletInstructions,
+            'patreon': patreonInstructions,
+            'paypal': paypalInstructions
+        };
+        
+        if (instructionsMap[metodo]) {
+            instructionsMap[metodo].style.display = 'block';
+            
+            // Configurar enlaces para Patreon y PayPal
+            if (metodo === 'patreon') {
+                const patreonKey = `patreon-${licencia}`;
+                const patreonUrl = paymentLinks[patreonKey] || paymentLinks['patreon-compra'];
+                patreonLink.href = patreonUrl;
+            } else if (metodo === 'paypal') {
+                const paypalKey = `paypal-${licencia}`;
+                const paypalUrl = paymentLinks[paypalKey] || paymentLinks['paypal-compra'];
+                paypalLink.href = paypalUrl;
+            }
+        }
+    }
+
+     // Mostrar formulario y ocultar otras secciones
+    document.querySelectorAll('.platform-section, .product-info, #free-options, .socials, .faq, footer').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    formSection.classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+    
+    // ⭐⭐ DETECCIÓN AUTOMÁTICA DEL FORMULARIO ⭐⭐
+    setTimeout(setupFormSubmissionDetection, 2000);
+}
+
+// Función para volver a las plataformas
+function showPlatforms() {
+    formSection.classList.add('hidden');
+    document.querySelectorAll('.platform-section, .product-info, #free-options, .socials, .faq, footer').forEach(el => {
+        el.style.display = 'block';
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// FAQ toggle
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+
+// Smooth scroll para anclas
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// ⭐⭐ FUNCIÓN DE DETECCIÓN DE ENVÍO DE FORMULARIO ⭐⭐
+// Detectar cuando se envía el formulario de Google Forms
+function setupFormSubmissionDetection() {
+    const formFrame = document.querySelector('iframe');
+    if (!formFrame) return;
+    
+    console.log('Configurando detección de envío de formulario...');
+    
+    // Verificar periódicamente si el formulario fue enviado
+    const checkFormSubmission = setInterval(() => {
+        try {
+            // Verificar si el iframe tiene contenido y detectar confirmación
+            if (formFrame.contentDocument && 
+                formFrame.contentDocument.body) {
+                
+                const bodyText = formFrame.contentDocument.body.innerText;
+                const htmlContent = formFrame.contentDocument.body.innerHTML;
+                
+                // Detectar varias formas en que Google Forms confirma el envío
+                if (bodyText.includes('Tu respuesta se ha registrado') ||
+                    bodyText.includes('Your response has been recorded') ||
+                    bodyText.includes('Gracias por tu respuesta') ||
+                    htmlContent.includes('freebirdFormviewerViewResponseConfirmation') ||
+                    formFrame.src.includes('/formResponse')) {
+                    
+                    console.log('✅ Formulario enviado detectado - Redirigiendo...');
+                    clearInterval(checkFormSubmission);
+                    window.location.href = 'formulario_enviado.html';
+                    return;
+                }
+            }
+        } catch (e) {
+            // Error de CORS, usar método alternativo
+            console.log('Verificando URL del formulario...');
+        }
+        
+        // Método alternativo: verificar URL
+        if (formFrame.src.includes('/formResponse')) {
+            console.log('✅ Formulario enviado (por URL) - Redirigiendo...');
+            clearInterval(checkFormSubmission);
+            window.location.href = 'formulario_enviado.html';
+        }
+    }, 1500); // Verificar cada 1.5 segundos
+
+    // También detectar cambios en la URL del iframe
+    let lastSrc = formFrame.src;
+    const urlCheck = setInterval(() => {
+        if (formFrame.src !== lastSrc) {
+            lastSrc = formFrame.src;
+            if (formFrame.src.includes('/formResponse')) {
+                console.log('✅ Cambio de URL detectado - Redirigiendo...');
+                clearInterval(urlCheck);
+                clearInterval(checkFormSubmission);
+                window.location.href = 'formulario_enviado.html';
+            }
+        }
+    }, 1000);
+
+    // Limpiar intervalos si se cierra el formulario
+    window.addEventListener('beforeunload', () => {
+        clearInterval(checkFormSubmission);
+        clearInterval(urlCheck);
+    });
+}
+</script>
+</body>
+</html>

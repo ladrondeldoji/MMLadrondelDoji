@@ -1,0 +1,307 @@
+{
+  "lastUpdate": "03/10/2025 08:57",
+  "totalProfit": "+11.8%",
+  "monthlyProfit": "+11.8%",
+  "winRate": "100.0%",
+  "maxDrawdown": "0.0%",
+  "profitFactor": "3.5",
+  "expectancy": "+0.02%",
+  "sharpeRatio": "2.50",
+  "returnRisk": "1182.6",
+  "totalTrades": "482",
+  "winningTrades": "482",
+  "losingTrades": "0",
+  "avgWin": "+0.02%",
+  "avgLoss": "0.00%",
+  "weeklyPerformance": "+8.0%",
+  "monthlyPerformance": "+11.8%",
+  "quarterlyPerformance": "+11.8%",
+  "yearlyPerformance": "+11.8%",
+  "dataSource": "MT5 Real",
+  "latestTrades": [
+    {
+      "symbol": "DBX",
+      "type": "SELL",
+      "openTime": "02/10/2025 22:53",
+      "closeTime": "03/10/2025 01:53",
+      "duration": "3h",
+      "profit": "$22.78",
+      "profitPercent": "0.02%",
+      "volume": "134.00",
+      "price": "29.87000"
+    },
+    {
+      "symbol": "SYF",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:50",
+      "closeTime": "03/10/2025 02:50",
+      "duration": "5h",
+      "profit": "$12.88",
+      "profitPercent": "0.01%",
+      "volume": "56.00",
+      "price": "70.45000"
+    },
+    {
+      "symbol": "DVY",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:46",
+      "closeTime": "02/10/2025 22:46",
+      "duration": "1h",
+      "profit": "$13.44",
+      "profitPercent": "0.01%",
+      "volume": "28.00",
+      "price": "142.08000"
+    },
+    {
+      "symbol": "V",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:41",
+      "closeTime": "03/10/2025 12:41",
+      "duration": "15h",
+      "profit": "$14.08",
+      "profitPercent": "0.01%",
+      "volume": "11.00",
+      "price": "346.55000"
+    },
+    {
+      "symbol": "ETR",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:40",
+      "closeTime": "03/10/2025 13:40",
+      "duration": "16h",
+      "profit": "$21.07",
+      "profitPercent": "0.02%",
+      "volume": "43.00",
+      "price": "93.48000"
+    },
+    {
+      "symbol": "ORLY",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:40",
+      "closeTime": "03/10/2025 15:40",
+      "duration": "18h",
+      "profit": "$12.16",
+      "profitPercent": "0.01%",
+      "volume": "38.00",
+      "price": "105.16000"
+    },
+    {
+      "symbol": "HBAN",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:39",
+      "closeTime": "02/10/2025 22:39",
+      "duration": "1h",
+      "profit": "$23.50",
+      "profitPercent": "0.02%",
+      "volume": "235.00",
+      "price": "17.06000"
+    },
+    {
+      "symbol": "MSFT",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:39",
+      "closeTime": "03/10/2025 05:39",
+      "duration": "8h",
+      "profit": "$35.28",
+      "profitPercent": "0.04%",
+      "volume": "7.00",
+      "price": "516.96000"
+    },
+    {
+      "symbol": "GLW",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:39",
+      "closeTime": "03/10/2025 11:39",
+      "duration": "14h",
+      "profit": "$36.48",
+      "profitPercent": "0.04%",
+      "volume": "48.00",
+      "price": "83.00000"
+    },
+    {
+      "symbol": "GNRC",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:38",
+      "closeTime": "03/10/2025 19:38",
+      "duration": "22h",
+      "profit": "$46.80",
+      "profitPercent": "0.05%",
+      "volume": "24.00",
+      "price": "170.11000"
+    },
+    {
+      "symbol": "NFLX",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:37",
+      "closeTime": "03/10/2025 20:37",
+      "duration": "23h",
+      "profit": "$63.87",
+      "profitPercent": "0.06%",
+      "volume": "3.00",
+      "price": "1159.17000"
+    },
+    {
+      "symbol": "RF",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:30",
+      "closeTime": "03/10/2025 07:30",
+      "duration": "10h",
+      "profit": "$26.01",
+      "profitPercent": "0.03%",
+      "volume": "153.00",
+      "price": "26.20000"
+    },
+    {
+      "symbol": "NYT",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:17",
+      "closeTime": "03/10/2025 20:17",
+      "duration": "23h",
+      "profit": "$43.92",
+      "profitPercent": "0.04%",
+      "volume": "72.00",
+      "price": "55.66000"
+    },
+    {
+      "symbol": "LYFT",
+      "type": "SELL",
+      "openTime": "02/10/2025 21:02",
+      "closeTime": "02/10/2025 22:02",
+      "duration": "1h",
+      "profit": "$38.64",
+      "profitPercent": "0.04%",
+      "volume": "184.00",
+      "price": "21.88000"
+    },
+    {
+      "symbol": "EQH",
+      "type": "SELL",
+      "openTime": "02/10/2025 20:59",
+      "closeTime": "03/10/2025 18:59",
+      "duration": "22h",
+      "profit": "$20.80",
+      "profitPercent": "0.02%",
+      "volume": "80.00",
+      "price": "50.02000"
+    },
+    {
+      "symbol": "OMF",
+      "type": "SELL",
+      "openTime": "02/10/2025 20:54",
+      "closeTime": "03/10/2025 11:54",
+      "duration": "15h",
+      "profit": "$24.85",
+      "profitPercent": "0.02%",
+      "volume": "71.00",
+      "price": "56.54000"
+    },
+    {
+      "symbol": "RJF",
+      "type": "SELL",
+      "openTime": "02/10/2025 20:53",
+      "closeTime": "03/10/2025 18:53",
+      "duration": "22h",
+      "profit": "$12.48",
+      "profitPercent": "0.01%",
+      "volume": "24.00",
+      "price": "166.79000"
+    },
+    {
+      "symbol": "BKR",
+      "type": "SELL",
+      "openTime": "02/10/2025 20:48",
+      "closeTime": "02/10/2025 21:48",
+      "duration": "1h",
+      "profit": "$25.42",
+      "profitPercent": "0.03%",
+      "volume": "82.00",
+      "price": "48.52000"
+    },
+    {
+      "symbol": "UAL",
+      "type": "SELL",
+      "openTime": "02/10/2025 20:36",
+      "closeTime": "03/10/2025 18:36",
+      "duration": "22h",
+      "profit": "$16.80",
+      "profitPercent": "0.02%",
+      "volume": "42.00",
+      "price": "94.83000"
+    },
+    {
+      "symbol": "GTLS",
+      "type": "SELL",
+      "openTime": "02/10/2025 19:33",
+      "closeTime": "02/10/2025 23:33",
+      "duration": "4h",
+      "profit": "$11.80",
+      "profitPercent": "0.01%",
+      "volume": "20.00",
+      "price": "200.53000"
+    }
+  ],
+  "equityData": {
+    "labels": [
+      "22/09",
+      "23/09",
+      "24/09",
+      "25/09",
+      "26/09",
+      "29/09",
+      "30/09",
+      "01/10",
+      "02/10"
+    ],
+    "data": [
+      10086,
+      10211,
+      10250,
+      10379,
+      10603,
+      10797,
+      10903,
+      11044,
+      11182
+    ]
+  },
+  "dailyProfitData": {
+    "labels": [
+      "27/09",
+      "28/09",
+      "29/09",
+      "30/09",
+      "01/10",
+      "02/10",
+      "03/10"
+    ],
+    "data": [
+      0,
+      0,
+      193,
+      106,
+      140,
+      138,
+      0
+    ]
+  },
+  "recentTradesData": {
+    "labels": [
+      "27/09",
+      "28/09",
+      "29/09",
+      "30/09",
+      "01/10",
+      "02/10",
+      "03/10"
+    ],
+    "data": [
+      0,
+      0,
+      62,
+      52,
+      60,
+      52,
+      0
+    ]
+  }
+}

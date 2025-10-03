@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Enviado - MM Ladrón del Doji</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background:#0f172a; 
+            color:#e2e8f0; 
+            line-height:1.6; 
+        }
+        header { 
+            text-align:center; 
+            padding:40px 20px; 
+            background: linear-gradient(135deg,#0f172a,#1e293b); 
+            color:white; 
+            border-bottom: 1px solid #334155; 
+        }
+        header h1 { 
+            font-size:2.2em; 
+            margin-bottom:8px; 
+            color:#38bdf8; 
+            font-weight:300;
+            letter-spacing: 1px;
+        }
+        header .subtitle { 
+            font-size:1em; 
+            margin-bottom:15px; 
+            color:#94a3b8; 
+            font-weight:300;
+        }
+        .info-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            border: 1px solid #334155;
+            font-weight: 500;
+        }
+        .badge.primary {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+        main { 
+            max-width:600px; 
+            margin:auto; 
+            padding:40px 20px; 
+        }
+        .success-card { 
+            background:#1e293b; 
+            padding:40px; 
+            border-radius:10px; 
+            text-align:center; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.2); 
+            border: 1px solid #334155; 
+            margin-bottom:30px; 
+        }
+        .success-icon { 
+            font-size:3em; 
+            margin-bottom:20px; 
+            color: #10b981;
+        }
+        .success-card h2 { 
+            color:#10b981; 
+            margin-bottom:15px; 
+            font-size:1.6em; 
+            font-weight:400;
+        }
+        .success-card p { 
+            color:#cbd5e1; 
+            margin-bottom:20px; 
+            font-size:1em; 
+        }
+        .timer-container { 
+            background:#1e293b; 
+            padding:25px; 
+            border-radius:8px; 
+            margin:25px 0; 
+            border: 2px solid #10b981; 
+        }
+        .timer-title { 
+            color:#10b981; 
+            font-weight:600; 
+            margin-bottom:12px; 
+            font-size:1em; 
+        }
+        .timer { 
+            font-size:2em; 
+            font-weight:600; 
+            color:#10b981; 
+            font-family: 'Courier New', monospace; 
+            margin: 10px 0;
+        }
+        .timer-subtitle { 
+            color:#94a3b8; 
+            font-size:0.85em; 
+            margin-top:10px; 
+        }
+        .verification-info { 
+            background:#1e293b; 
+            padding:25px; 
+            border-radius:10px; 
+            margin:25px 0; 
+            border-left:4px solid #f59e0b; 
+        }
+        .verification-info h3 { 
+            color:#f59e0b; 
+            margin-bottom:12px; 
+            font-weight:400;
+        }
+        .next-steps { 
+            background:#334155; 
+            padding:25px; 
+            border-radius:10px; 
+            margin:25px 0; 
+            text-align:left; 
+        }
+        .next-steps h3 { 
+            color:#38bdf8; 
+            margin-bottom:15px; 
+            text-align:center; 
+            font-weight:400;
+        }
+        .next-steps ol { 
+            margin-left:20px; 
+        }
+        .next-steps li { 
+            margin-bottom:12px; 
+            color:#e2e8f0; 
+        }
+        .contact-info { 
+            background:#1e293b; 
+            padding:25px; 
+            border-radius:10px; 
+            margin:25px 0; 
+            border-left:4px solid #38bdf8; 
+        }
+        .contact-info h3 { 
+            color:#38bdf8; 
+            margin-bottom:12px; 
+            font-weight:400;
+        }
+        .buttons { 
+            display:flex; 
+            gap:15px; 
+            justify-content:center; 
+            margin:30px 0; 
+            flex-wrap:wrap; 
+        }
+        .button { 
+            display:inline-block; 
+            background:#38bdf8; 
+            color:#0f172a; 
+            padding:14px 28px; 
+            border-radius:8px; 
+            text-decoration:none; 
+            font-weight:500; 
+            transition: all 0.3s ease; 
+            text-align: center;
+        }
+        .button:hover { 
+            background:#0ea5e9; 
+            transform: translateY(-1px);
+        }
+        .button.secondary { 
+            background:#475569; 
+            color:white; 
+        }
+        .button.secondary:hover { 
+            background:#64748b; 
+        }
+        .button.telegram { 
+            background:#0088cc; 
+            color:white; 
+        }
+        .button.telegram:hover { 
+            background:#0077b5; 
+        }
+        footer { 
+            text-align:center; 
+            padding:30px; 
+            font-size:0.85em; 
+            color:#94a3b8; 
+            margin-top:50px; 
+            border-top: 1px solid #334155; 
+        }
+        .socials { 
+            margin-top:15px; 
+            font-size:0.85em; 
+            text-align:center; 
+        }
+        .socials a { 
+            color:#38bdf8; 
+            text-decoration:none; 
+            margin:0 12px; 
+            transition: color 0.3s ease;
+        }
+        .socials a:hover { 
+            color:#0ea5e9; 
+        }
+        .recommendations { 
+            background:#1e293b; 
+            padding:25px; 
+            border-radius:10px; 
+            margin:25px 0; 
+            border-left:4px solid #f59e0b; 
+        }
+        .recommendations h3 { 
+            color:#f59e0b; 
+            margin-bottom:12px; 
+            font-weight:400;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .process-step {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+        .process-step .step-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            color: #38bdf8;
+        }
+        .process-step .step-text {
+            font-size: 0.8em;
+            color: #cbd5e1;
+        }
+        @media (max-width: 768px) {
+            .buttons { flex-direction: column; }
+            .button { text-align: center; }
+            .timer { font-size: 1.5em; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MM Ladrón del Doji</h1>
+    <div class="subtitle">Sistema de Trading Automatizado - Confirmación de Solicitud</div>
+    
+    <div class="info-badges">
+        <div class="badge primary">Versión 1.54</div>
+        <div class="badge">Procesando Licencia</div>
+    </div>
+</header>
+
+<main>
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h2>Solicitud Recibida Correctamente</h2>
+        <p>Hemos recibido tu solicitud y estamos procesando tu licencia. Recibirás confirmación por email.</p>
+        
+        <div class="timer-container">
+            <div class="timer-title">Tiempo estimado de verificación:</div>
+            <div class="timer" id="countdown">24:00:00</div>
+            <div class="timer-subtitle">Recibirás el robot antes de que finalice este tiempo</div>
+        </div>
+    </div>
+
+    <!-- Proceso de Verificación -->
+    <div class="verification-info">
+        <h3>Proceso de Verificación</h3>
+        <p>Estamos verificando tu información para garantizar la seguridad del proceso:</p>
+        
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-icon">✓</div>
+                <div class="step-text">Datos del Formulario</div>
+            </div>
+            <div class="process-step">
+                <div class="step-icon">⏳</div>
+                <div class="step-text">Confirmación de Pago</div>
+            </div>
+            <div class="process-step">
+                <div class="step-icon">⏳</div>
+                <div class="step-text">Validación MT5</div>
+            </div>
+            <div class="process-step">
+                <div class="step-icon">⏳</div>
+                <div class="step-text">Activación Licencia</div>
+            </div>
+        </div>
+        
+        <p style="color:#f59e0b; font-weight:500; margin-top: 15px; text-align: center;">
+            Revisa tu email incluyendo la carpeta de spam
+        </p>
+    </div>
+
+    <!-- Próximos Pasos -->
+    <div class="next-steps">
+        <h3>Próximos Pasos</h3>
+        <ol>
+            <li><strong>Email de confirmación</strong> con los detalles de tu licencia</li>
+            <li><strong>Archivo del robot</strong> en formato .ex5 para MetaTrader 5</li>
+            <li><strong>Instrucciones completas</strong> de instalación y configuración</li>
+            <li><strong>Soporte técnico</strong> para resolver cualquier duda</li>
+            <li><strong>Actualizaciones gratuitas</strong> del software incluídas</li>
+        </ol>
+    </div>
+
+    <!-- Información de Contacto -->
+    <div class="contact-info">
+        <h3>Asistencia y Soporte</h3>
+        <p>Si necesitas ayuda urgente o no recibes confirmación en 24 horas:</p>
+        <div style="text-align: center; margin: 18px 0; background: #334155; padding: 15px; border-radius: 8px;">
+            <div style="font-weight: 500; color: #38bdf8; margin-bottom: 8px;">Contacto Directo</div>
+            <div style="color: #cbd5e1; font-size: 0.9em;">
+                Email: ladrondeldoji@gmail.com<br>
+                Telegram: @ladrondeldojibasic<br>
+                Horario: 24/7 todos los días
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="buttons">
+        <a href="index.html" class="button">Ver Resultados</a>
+        <a href="compra.html" class="button secondary">Volver a Opciones</a>
+        <a href="https://t.me/ladrondeldojibasic" target="_blank" class="button telegram">Soporte Urgente</a>
+    </div>
+
+    <!-- Recomendaciones -->
+    <div class="recommendations">
+        <h3>Recomendaciones de Uso</h3>
+        <div style="color:#cbd5e1; font-size:0.9em; line-height: 1.8;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span style="color: #10b981; margin-right: 10px;">•</span>
+                <span>Prueba el robot primero en una cuenta demo</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span style="color: #10b981; margin-right: 10px;">•</span>
+                <span>Configura parámetros conservadores inicialmente</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span style="color: #10b981; margin-right: 10px;">•</span>
+                <span>Nunca inviertas más de lo que estés dispuesto a perder</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <span style="color: #10b981; margin-right: 10px;">•</span>
+                <span>El trading automatizado requiere supervisión periódica</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 MM Ladrón del Doji. Todos los derechos reservados.</p>
+    <div class="socials">
+        <a href="https://t.me/ladrondeldojibasic" target="_blank">Telegram</a> |
+        <a href="https://www.instagram.com/elladrondeldoji/" target="_blank">Instagram</a> |
+        <a href="https://www.youtube.com/channel/UCNW70E4v0etvX1b0ByWkGjg" target="_blank">YouTube</a> |
+        <a href="https://x.com/ladrondeldoji" target="_blank">Twitter</a> |
+        <a href="mailto:ladrondeldoji@gmail.com">Email</a>
+    </div>
+</footer>
+
+<script>
+// Cuenta atrás de 24 horas (86400 segundos)
+let totalSeconds = 24 * 60 * 60;
+const countdownElement = document.getElementById('countdown');
+
+function updateCountdown() {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    if (totalSeconds > 0) {
+        countdownElement.textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        totalSeconds--;
+        
+        // Cambiar color cuando queden menos de 4 horas
+        if (totalSeconds < 4 * 60 * 60) {
+            countdownElement.style.color = "#f59e0b";
+            updateProcessStep(2); // Actualizar segundo paso
+        }
+        
+        // Cambiar color cuando queden menos de 1 hora
+        if (totalSeconds < 60 * 60) {
+            countdownElement.style.color = "#ef4444";
+            updateProcessStep(3); // Actualizar tercer paso
+        }
+        
+        // Actualizar primer paso inmediatamente
+        if (totalSeconds === 23 * 60 * 60) {
+            updateProcessStep(1);
+        }
+    } else {
+        countdownElement.textContent = "00:00:00";
+        countdownElement.style.color = "#ef4444";
+        updateProcessStep(4); // Todos los pasos completos
+        document.querySelector('.timer-subtitle').textContent = "¡Por favor contacta con soporte si no has recibido el robot!";
+    }
+}
+
+// Función para actualizar los pasos del proceso
+function updateProcessStep(step) {
+    const steps = document.querySelectorAll('.process-step');
+    const icons = ['✓', '✓', '✓', '✓'];
+    const texts = ['Datos Validados', 'Pago Confirmado', 'MT5 Verificado', 'Licencia Activada'];
+    
+    for (let i = 0; i < step; i++) {
+        if (steps[i]) {
+            steps[i].querySelector('.step-icon').textContent = icons[i];
+            steps[i].querySelector('.step-icon').style.color = "#10b981";
+            steps[i].querySelector('.step-text').textContent = texts[i];
+        }
+    }
+}
+
+// Actualizar cada segundo
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Ejecutar inmediatamente
+
+// Mostrar hora actual de recepción
+const receptionTime = new Date();
+receptionTime.setHours(receptionTime.getHours() + 24);
+const timeElement = document.createElement('div');
+timeElement.style.cssText = 'color:#64748b; font-size:0.8em; margin-top:8px;';
+timeElement.textContent = `Hora límite: ${receptionTime.toLocaleString('es-ES')}`;
+document.querySelector('.timer-subtitle').appendChild(timeElement);
+
+// Efecto de confirmación sutil
+function createConfirmationEffect() {
+    const successCard = document.querySelector('.success-card');
+    successCard.style.transform = 'scale(0.95)';
+    successCard.style.transition = 'transform 0.3s ease';
+    
+    setTimeout(() => {
+        successCard.style.transform = 'scale(1)';
+    }, 150);
+}
+
+// Ejecutar efecto cuando la página carga
+window.addEventListener('load', createConfirmationEffect);
+
+// Tracking de conversión
+console.log('Formulario completado - ' + new Date().toLocaleString());
+
+// Actualización progresiva de pasos
+setTimeout(() => updateProcessStep(1), 2000);
+setTimeout(() => updateProcessStep(2), 8000);
+setTimeout(() => updateProcessStep(3), 16000);
+</script>
+</body>
+</html>
