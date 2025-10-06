@@ -1,243 +1,243 @@
 {
-  "lastUpdate": "04/10/2025 06:36",
-  "totalProfit": "+14.0%",
-  "monthlyProfit": "+14.0%",
-  "winRate": "99.7%",
+  "lastUpdate": "06/10/2025 22:37",
+  "totalProfit": "+16.1%",
+  "monthlyProfit": "+16.1%",
+  "winRate": "99.5%",
   "maxDrawdown": "-1.0%",
   "profitFactor": "3.5",
-  "expectancy": "+0.02%",
+  "expectancy": "+0.03%",
   "sharpeRatio": "2.50",
   "returnRisk": "8.0",
-  "totalTrades": "573",
-  "winningTrades": "571",
-  "losingTrades": "2",
-  "avgWin": "+0.02%",
+  "totalTrades": "639",
+  "winningTrades": "636",
+  "losingTrades": "3",
+  "avgWin": "+0.03%",
   "avgLoss": "-0.00%",
-  "weeklyPerformance": "+8.0%",
-  "monthlyPerformance": "+14.0%",
-  "quarterlyPerformance": "+14.0%",
-  "yearlyPerformance": "+14.0%",
+  "weeklyPerformance": "+8.2%",
+  "monthlyPerformance": "+16.1%",
+  "quarterlyPerformance": "+16.1%",
+  "yearlyPerformance": "+16.1%",
   "dataSource": "MT5 Real",
   "latestTrades": [
     {
-      "symbol": "TWLO",
+      "symbol": "DBX",
       "type": "SELL",
-      "openTime": "03/10/2025 22:55",
-      "closeTime": "04/10/2025 20:55",
-      "duration": "22h",
-      "profit": "$17.16",
+      "openTime": "06/10/2025 20:33",
+      "closeTime": "07/10/2025 00:33",
+      "duration": "4h",
+      "profit": "$16.20",
       "profitPercent": "0.02%",
-      "volume": "39.00",
-      "price": "102.98000"
+      "volume": "135.00",
+      "price": "29.56000"
     },
     {
-      "symbol": "IWM",
+      "symbol": "RCL",
       "type": "SELL",
-      "openTime": "03/10/2025 22:41",
-      "closeTime": "04/10/2025 05:41",
-      "duration": "7h",
-      "profit": "$10.88",
+      "openTime": "06/10/2025 20:28",
+      "closeTime": "07/10/2025 09:28",
+      "duration": "13h",
+      "profit": "$10.68",
       "profitPercent": "0.01%",
-      "volume": "16.00",
-      "price": "246.13000"
+      "volume": "12.00",
+      "price": "317.39000"
     },
     {
-      "symbol": "INCY",
+      "symbol": "HWM",
       "type": "SELL",
-      "openTime": "03/10/2025 22:41",
-      "closeTime": "04/10/2025 07:41",
-      "duration": "9h",
-      "profit": "$14.26",
-      "profitPercent": "0.01%",
-      "volume": "46.00",
-      "price": "86.84000"
-    },
-    {
-      "symbol": "KR",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:38",
-      "closeTime": "03/10/2025 23:38",
-      "duration": "1h",
-      "profit": "$9.60",
-      "profitPercent": "0.01%",
-      "volume": "60.00",
-      "price": "66.29000"
-    },
-    {
-      "symbol": "PFGC",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:38",
-      "closeTime": "04/10/2025 18:38",
-      "duration": "20h",
-      "profit": "$17.48",
-      "profitPercent": "0.02%",
-      "volume": "38.00",
-      "price": "103.05000"
-    },
-    {
-      "symbol": "IVZ",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:35",
-      "closeTime": "04/10/2025 14:35",
+      "openTime": "06/10/2025 20:28",
+      "closeTime": "07/10/2025 12:28",
       "duration": "16h",
-      "profit": "$19.92",
+      "profit": "$20.16",
+      "profitPercent": "0.02%",
+      "volume": "21.00",
+      "price": "189.89000"
+    },
+    {
+      "symbol": "GSLC",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:25",
+      "closeTime": "07/10/2025 17:25",
+      "duration": "21h",
+      "profit": "$12.40",
+      "profitPercent": "0.01%",
+      "volume": "31.00",
+      "price": "130.99000"
+    },
+    {
+      "symbol": "IBM",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 03:23",
+      "duration": "7h",
+      "profit": "$19.76",
+      "profitPercent": "0.02%",
+      "volume": "13.00",
+      "price": "290.52000"
+    },
+    {
+      "symbol": "LVS",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 08:23",
+      "duration": "12h",
+      "profit": "$20.52",
+      "profitPercent": "0.02%",
+      "volume": "76.00",
+      "price": "52.78000"
+    },
+    {
+      "symbol": "MMM",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 01:23",
+      "duration": "5h",
+      "profit": "$20.75",
+      "profitPercent": "0.02%",
+      "volume": "25.00",
+      "price": "155.69000"
+    },
+    {
+      "symbol": "NCLH",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 02:23",
+      "duration": "6h",
+      "profit": "$23.24",
       "profitPercent": "0.02%",
       "volume": "166.00",
-      "price": "24.09000"
+      "price": "24.14000"
     },
     {
-      "symbol": "AMG",
+      "symbol": "ALK",
       "type": "SELL",
-      "openTime": "03/10/2025 22:35",
-      "closeTime": "04/10/2025 18:35",
-      "duration": "20h",
-      "profit": "$11.90",
-      "profitPercent": "0.01%",
-      "volume": "17.00",
-      "price": "242.86000"
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 19:23",
+      "duration": "23h",
+      "profit": "$24.07",
+      "profitPercent": "0.02%",
+      "volume": "83.00",
+      "price": "48.08000"
     },
     {
-      "symbol": "YUM",
+      "symbol": "DOCU",
       "type": "SELL",
-      "openTime": "03/10/2025 22:26",
-      "closeTime": "04/10/2025 00:26",
-      "duration": "2h",
-      "profit": "$10.92",
-      "profitPercent": "0.01%",
-      "volume": "26.00",
-      "price": "150.74000"
-    },
-    {
-      "symbol": "DLTR",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:26",
-      "closeTime": "04/10/2025 07:26",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 05:23",
       "duration": "9h",
-      "profit": "$17.16",
-      "profitPercent": "0.02%",
-      "volume": "44.00",
-      "price": "89.79000"
-    },
-    {
-      "symbol": "GM",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:20",
-      "closeTime": "04/10/2025 16:20",
-      "duration": "18h",
-      "profit": "$11.22",
-      "profitPercent": "0.01%",
-      "volume": "66.00",
-      "price": "60.48000"
-    },
-    {
-      "symbol": "OKTA",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:20",
-      "closeTime": "04/10/2025 02:20",
-      "duration": "4h",
-      "profit": "$11.34",
-      "profitPercent": "0.01%",
-      "volume": "42.00",
-      "price": "93.70000"
-    },
-    {
-      "symbol": "ARKK",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:16",
-      "closeTime": "04/10/2025 02:16",
-      "duration": "4h",
-      "profit": "$13.05",
-      "profitPercent": "0.01%",
-      "volume": "45.00",
-      "price": "88.63000"
-    },
-    {
-      "symbol": "GEN",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:13",
-      "closeTime": "04/10/2025 00:13",
-      "duration": "2h",
-      "profit": "$17.28",
-      "profitPercent": "0.02%",
-      "volume": "144.00",
-      "price": "27.88000"
-    },
-    {
-      "symbol": "EQH",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:13",
-      "closeTime": "04/10/2025 20:13",
-      "duration": "22h",
-      "profit": "$16.38",
-      "profitPercent": "0.02%",
-      "volume": "78.00",
-      "price": "51.09000"
-    },
-    {
-      "symbol": "MRVL",
-      "type": "SELL",
-      "openTime": "03/10/2025 22:13",
-      "closeTime": "04/10/2025 19:13",
-      "duration": "21h",
-      "profit": "$25.30",
+      "profit": "$31.36",
       "profitPercent": "0.03%",
-      "volume": "46.00",
-      "price": "86.30000"
+      "volume": "56.00",
+      "price": "71.51000"
     },
     {
-      "symbol": "BRKb",
+      "symbol": "CCL",
       "type": "SELL",
-      "openTime": "03/10/2025 21:42",
-      "closeTime": "04/10/2025 15:42",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 12:23",
+      "duration": "16h",
+      "profit": "$46.20",
+      "profitPercent": "0.05%",
+      "volume": "140.00",
+      "price": "28.82000"
+    },
+    {
+      "symbol": "ETSY",
+      "type": "SELL",
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 14:23",
       "duration": "18h",
-      "profit": "$11.62",
-      "profitPercent": "0.01%",
-      "volume": "7.00",
-      "price": "502.15000"
+      "profit": "$60.48",
+      "profitPercent": "0.06%",
+      "volume": "56.00",
+      "price": "72.35000"
     },
     {
-      "symbol": "PM",
+      "symbol": "M",
       "type": "SELL",
-      "openTime": "03/10/2025 21:42",
-      "closeTime": "04/10/2025 05:42",
-      "duration": "8h",
-      "profit": "$11.96",
-      "profitPercent": "0.01%",
-      "volume": "26.00",
-      "price": "152.25000"
+      "openTime": "06/10/2025 20:23",
+      "closeTime": "07/10/2025 05:23",
+      "duration": "9h",
+      "profit": "$66.30",
+      "profitPercent": "0.07%",
+      "volume": "221.00",
+      "price": "18.35000"
     },
     {
-      "symbol": "SO",
+      "symbol": "AEP",
       "type": "SELL",
-      "openTime": "03/10/2025 21:42",
-      "closeTime": "04/10/2025 19:42",
-      "duration": "22h",
-      "profit": "$12.60",
-      "profitPercent": "0.01%",
-      "volume": "42.00",
-      "price": "94.70000"
-    },
-    {
-      "symbol": "WEC",
-      "type": "SELL",
-      "openTime": "03/10/2025 21:42",
-      "closeTime": "04/10/2025 14:42",
-      "duration": "17h",
-      "profit": "$12.95",
-      "profitPercent": "0.01%",
-      "volume": "35.00",
-      "price": "113.79000"
-    },
-    {
-      "symbol": "MO",
-      "type": "SELL",
-      "openTime": "03/10/2025 21:42",
-      "closeTime": "04/10/2025 14:42",
-      "duration": "17h",
-      "profit": "$15.60",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 04:31",
+      "duration": "9h",
+      "profit": "$21.00",
       "profitPercent": "0.02%",
-      "volume": "60.00",
-      "price": "65.84000"
+      "volume": "35.00",
+      "price": "114.71000"
+    },
+    {
+      "symbol": "JPM",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 11:31",
+      "duration": "16h",
+      "profit": "$23.53",
+      "profitPercent": "0.02%",
+      "volume": "13.00",
+      "price": "308.97000"
+    },
+    {
+      "symbol": "ROKU",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 01:31",
+      "duration": "6h",
+      "profit": "$25.84",
+      "profitPercent": "0.03%",
+      "volume": "38.00",
+      "price": "104.52000"
+    },
+    {
+      "symbol": "FOX",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "06/10/2025 22:31",
+      "duration": "3h",
+      "profit": "$31.68",
+      "profitPercent": "0.03%",
+      "volume": "72.00",
+      "price": "55.80000"
+    },
+    {
+      "symbol": "ESTC",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 08:31",
+      "duration": "13h",
+      "profit": "$34.78",
+      "profitPercent": "0.03%",
+      "volume": "47.00",
+      "price": "84.51000"
+    },
+    {
+      "symbol": "NVST",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 13:31",
+      "duration": "18h",
+      "profit": "$42.24",
+      "profitPercent": "0.04%",
+      "volume": "192.00",
+      "price": "21.00000"
+    },
+    {
+      "symbol": "LYFT",
+      "type": "SELL",
+      "openTime": "06/10/2025 19:31",
+      "closeTime": "07/10/2025 16:31",
+      "duration": "21h",
+      "profit": "$42.32",
+      "profitPercent": "0.04%",
+      "volume": "184.00",
+      "price": "21.94000"
     }
   ],
   "equityData": {
@@ -251,7 +251,8 @@
       "30/09",
       "01/10",
       "02/10",
-      "03/10"
+      "03/10",
+      "06/10"
     ],
     "data": [
       10086,
@@ -263,47 +264,48 @@
       10903,
       11044,
       11182,
-      11401
+      11401,
+      11610
     ]
   },
   "dailyProfitData": {
     "labels": [
-      "28/09",
-      "29/09",
       "30/09",
       "01/10",
       "02/10",
       "03/10",
-      "04/10"
+      "04/10",
+      "05/10",
+      "06/10"
     ],
     "data": [
-      0,
-      193,
       106,
       140,
       138,
       218,
-      0
+      0,
+      0,
+      209
     ]
   },
   "recentTradesData": {
     "labels": [
-      "28/09",
-      "29/09",
       "30/09",
       "01/10",
       "02/10",
       "03/10",
-      "04/10"
+      "04/10",
+      "05/10",
+      "06/10"
     ],
     "data": [
-      0,
-      62,
       52,
       60,
       52,
       91,
-      0
+      0,
+      0,
+      66
     ]
   }
 }
